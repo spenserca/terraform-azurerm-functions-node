@@ -8,7 +8,7 @@ variable "service_plan_id" {}
 variable "tags" {}
 variable "unique_id" {}
 
-resource "azurerm_linux_function_app" "function_app" {
+resource "azurerm_windows_function_app" "function_app" {
   location            = var.location
   name                = "func-${var.unique_id}"
   resource_group_name = var.resource_group
