@@ -7,6 +7,7 @@ variable "resource_group" {}
 variable "service_plan_id" {}
 variable "tags" {}
 variable "unique_id" {}
+variable "storage_account" {}
 
 resource "azurerm_windows_function_app" "function_app" {
   location            = var.location
@@ -46,6 +47,7 @@ resource "azurerm_windows_function_app" "function_app" {
     type = "SystemAssigned"
   }
 
+  storage_account_name          = var.storage_account
   storage_uses_managed_identity = true
   tags                          = var.tags
 }
