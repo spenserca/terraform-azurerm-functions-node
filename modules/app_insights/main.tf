@@ -8,8 +8,8 @@ resource "azurerm_application_insights" "app_insights" {
   location            = var.location
   resource_group_name = var.resource_group
   application_type    = "Node.JS"
-  retention_in_days = 30
-  tags = var.tags
+  retention_in_days   = 30
+  tags                = var.tags
 }
 
 output "instrumentation_key" {
