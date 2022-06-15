@@ -32,7 +32,7 @@ resource "azurerm_windows_function_app" "function_app" {
 
   auth_settings {
     enabled = true
-    active_directory = {
+    active_directory {
       client_id     = var.backend_client_id
       client_secret = var.backend_client_secret
     }
