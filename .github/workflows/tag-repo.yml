@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  Tag-Repo:
+  Deploy-Infra:
     runs-on: ubuntu-latest
     env:
       ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
@@ -30,7 +30,13 @@ jobs:
         run: terraform validate -no-color
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color -input=false -var-file=test.tfvars
+        run: terraform plan -no-color -input=false -var-file=test/test.tfvars
+  Tag-Repo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Required due to the weg Git works, without it this action won't be able to find any or the correct tags
       - name: 'Get Previous tag'
         id: previoustag
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
