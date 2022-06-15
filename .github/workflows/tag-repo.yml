@@ -32,7 +32,7 @@ jobs:
         id: plan
         run: terraform plan -no-color -input=false -var-file=test/test.tfvars
       - name: Terraform Apply
-        id: plan
+        id: apply
         run: terraform apply -input=false -no-color -input=false -var-file=test/test.tfvars
   Tag-Repo:
     runs-on: ubuntu-latest
