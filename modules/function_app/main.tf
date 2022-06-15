@@ -24,13 +24,13 @@ resource "azurerm_windows_function_app" "function_app" {
     }
 
     cors {
-      allowed_origins = "*"
+      allowed_origins = ["*"]
     }
   }
 
   app_settings = var.app_settings
 
-  auth_settings = {
+  auth_settings {
     enabled = true
     active_directory = {
       client_id     = var.backend_client_id
