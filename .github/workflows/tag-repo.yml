@@ -35,6 +35,7 @@ jobs:
         id: apply
         run: terraform apply -input=false -no-color -input=false -var-file=test/test.tfvars
   Tag-Repo:
+    needs: Deploy-Infra
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
