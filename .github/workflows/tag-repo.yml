@@ -8,6 +8,11 @@ on:
 jobs:
   Tag-Repo:
     runs-on: ubuntu-latest
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_TENANT_ID: c53cfdfe-808c-4f56-92c3-20a53028adba
+      ARM_SUBSCRIPTION_ID: 2e620b8c-ad76-4d1f-a9aa-6a2bd703288a
     steps:
       - uses: actions/checkout@v2
         with:
