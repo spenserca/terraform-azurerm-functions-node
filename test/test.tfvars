@@ -4,7 +4,7 @@ app_settings = {
 }
 backend_client_secret            = "secret"
 backend_client_id                = "client_id"
-location                         = "northcentralus"
+location                         = "centralus"
 project                          = "tfm-azure-functions-node"
 resource_group                   = "tfm-azure-functions-node"
 storage_account_tier             = "Standard"
