@@ -51,6 +51,10 @@ variable "tags" {
   description = "Tags associated with the resources."
 }
 
+variable "terraform_state_storage_account" {
+  type = string
+}
+
 variable "unique_id" {
   description = "A unique identifier for the function app to use. Usually includes some acronym for the project."
 }

@@ -12,4 +12,5 @@ storage_account_replication_type = "LRS"
 tags = {
   tag = "gat"
 }
-unique_id = "spenserca-tfm-azure-functions-node"
+terraform_state_storage_account = "scatfazfuncnode"
+unique_id                       = "spenserca-tfm-azure-functions-node"
