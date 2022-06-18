@@ -30,7 +30,7 @@ jobs:
         run: terraform validate -no-color
       - name: Terraform Plan
         id: plan
-        run: terraform plan -backend-config=test/backend.tf -no-color -input=false -var-file=test/test.tfvars
+        run: terraform plan -no-color -input=false -var-file=test/test.tfvars
       - name: Terraform Apply
         id: apply
         run: terraform apply -backend-config=test/backend.tf -no-color -auto-approve -var-file=test/test.tfvars
