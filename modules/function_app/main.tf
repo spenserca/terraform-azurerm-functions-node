@@ -24,7 +24,6 @@ resource "azurerm_windows_function_app" "function_app" {
   service_plan_id     = var.service_plan_id
 
   site_config {
-    always_on                = true
     application_insights_key = var.app_insights_key
 
     application_stack {
