@@ -34,6 +34,9 @@ jobs:
       - name: Terraform Apply
         id: apply
         run: terraform apply -no-color -auto-approve -var-file=test/test.tfvars
+      - name: Terraform Destroy
+        id: destroy
+        run: terraform destroy -no-color -auto-approve -var-file=test/test.tfvars
   Tag-Repo:
     needs: Deploy-Infra
     runs-on: ubuntu-latest
