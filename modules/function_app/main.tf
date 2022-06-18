@@ -55,7 +55,6 @@ resource "azurerm_windows_function_app" "function_app" {
     type = "SystemAssigned"
   }
 
-  storage_account_name          = var.storage_account
-  storage_uses_managed_identity = true
-  tags                          = var.tags
+  storage_account_name = var.storage_account
+  tags                 = var.tags
 }
