@@ -5,8 +5,12 @@ variable "storage_account_replication_type" {}
 variable "unique_id" {}
 variable "tags" {}
 
+locals {
+  unique_hash = sha256(var.unique_id)
+}
+
 resource "azurerm_storage_account" "storage_account" {
-  name                      = "st${var.unique_id}"
+  name                      = "st${substr(local.unique_hash, 0, 22)}"
   resource_group_name       = var.resource_group
   location                  = var.location
   account_replication_type  = var.storage_account_replication_type

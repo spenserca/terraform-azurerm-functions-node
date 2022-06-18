@@ -12,4 +12,4 @@ storage_account_replication_type = "LRS"
 tags = {
   tag = "gat"
 }
-unique_id = "scatfmafn"
+unique_id = "spenserca-tfm-azure-functions-node"
