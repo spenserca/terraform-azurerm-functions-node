@@ -5,9 +5,16 @@ variable "backend_client_secret" {}
 variable "location" {}
 variable "resource_group" {}
 variable "service_plan_id" {}
+variable "storage_account" {}
+variable "storage_account_connection_string" {}
 variable "tags" {}
 variable "unique_id" {}
-variable "storage_account" {}
+
+locals {
+  default_app_settings = {
+    WEBSITE_CONTENTAZUREFILECONNECTIONSTRING = var.storage_account_connection_string
+  }
+}
 
 resource "azurerm_windows_function_app" "function_app" {
   location            = var.location
@@ -28,7 +35,7 @@ resource "azurerm_windows_function_app" "function_app" {
     }
   }
 
-  app_settings = var.app_settings
+  app_settings = merge(local.default_app_settings, var.app_settings)
 
   auth_settings {
     enabled = true

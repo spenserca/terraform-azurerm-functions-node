@@ -40,15 +40,16 @@ module "app_insights" {
 }
 
 module "function_app" {
-  source                = "./modules/function_app"
-  app_insights_key      = module.app_insights.instrumentation_key
-  app_settings          = var.app_settings
-  backend_client_id     = var.backend_client_id
-  backend_client_secret = var.backend_client_secret
-  location              = var.location
-  resource_group        = var.resource_group
-  service_plan_id       = module.app_service_plan.id
-  storage_account       = module.storage_account.name
-  tags                  = var.tags
-  unique_id             = var.unique_id
+  source                            = "./modules/function_app"
+  app_insights_key                  = module.app_insights.instrumentation_key
+  app_settings                      = var.app_settings
+  backend_client_id                 = var.backend_client_id
+  backend_client_secret             = var.backend_client_secret
+  location                          = var.location
+  resource_group                    = var.resource_group
+  service_plan_id                   = module.app_service_plan.id
+  storage_account                   = module.storage_account.name
+  storage_account_connection_string = module.storage_account.connection_string
+  tags                              = var.tags
+  unique_id                         = var.unique_id
 }
