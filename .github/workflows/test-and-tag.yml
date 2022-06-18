@@ -24,7 +24,7 @@ jobs:
         run: terraform fmt -check
       - name: Terraform init
         id: init
-        run: terraform init -backend=false
+        run: terraform init -backend-config=test/backend.tf
       - name: Terraform validate
         id: validate
         run: terraform validate -no-color
@@ -33,7 +33,7 @@ jobs:
         run: terraform plan -no-color -input=false -var-file=test/test.tfvars
       - name: Terraform Apply
         id: apply
-        run: terraform apply -input=false -no-color -input=false -var-file=test/test.tfvars
+        run: terraform apply -no-color -input=false -var-file=test/test.tfvars
   Tag-Repo:
     needs: Deploy-Infra
     runs-on: ubuntu-latest
