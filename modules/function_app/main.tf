@@ -14,11 +14,12 @@ locals {
   default_app_settings = {
     WEBSITE_CONTENTAZUREFILECONNECTIONSTRING = var.storage_account_connection_string
   }
+  unique_hash = sha256(var.unique_id)
 }
 
 resource "azurerm_windows_function_app" "function_app" {
   location            = var.location
-  name                = "func-${var.unique_id}"
+  name                = "func-${substr(local.unique_hash, 0, 19)}"
   resource_group_name = var.resource_group
   service_plan_id     = var.service_plan_id
 
