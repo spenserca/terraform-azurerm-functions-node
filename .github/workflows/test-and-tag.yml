@@ -1,0 +1,63 @@
+name: Test and Tag
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Deploy-Infra:
+    runs-on: ubuntu-latest
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_TENANT_ID: c53cfdfe-808c-4f56-92c3-20a53028adba
+      ARM_SUBSCRIPTION_ID: 2e620b8c-ad76-4d1f-a9aa-6a2bd703288a
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Required due to the weg Git works, without it this action won't be able to find any or the correct tags
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+      - name: Terraform format
+        id: fmt
+        run: terraform fmt -check
+      - name: Terraform init
+        id: init
+        run: terraform init -backend=false
+      - name: Terraform validate
+        id: validate
+        run: terraform validate -no-color
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color -input=false -var-file=test/test.tfvars
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -input=false -no-color -input=false -var-file=test/test.tfvars
+  Tag-Repo:
+    needs: Deploy-Infra
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Required due to the weg Git works, without it this action won't be able to find any or the correct tags
+      - name: 'Get Previous tag'
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        with:
+          fallback: 0.0.1
+      - name: 'Get next minor version'
+        id: semvers
+        uses: "WyriHaximus/github-action-next-semvers@v1"
+        with:
+          version: ${{ steps.previoustag.outputs.tag }}
+      - name: Release snapshot
+        id: release-snapshot
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.semvers.outputs.patch }}
+          release_name: v${{ steps.semvers.outputs.patch }}
+          draft: false
+          prerelease: false
