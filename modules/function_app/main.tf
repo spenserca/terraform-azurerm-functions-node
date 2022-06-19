@@ -57,3 +57,7 @@ resource "azurerm_windows_function_app" "function_app" {
   storage_account_name = var.storage_account
   tags                 = var.tags
 }
+
+output "backend_url" {
+  value = "https://${azurerm_windows_function_app.function_app.default_hostname}"
+}
