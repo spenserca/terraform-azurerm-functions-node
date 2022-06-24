@@ -53,7 +53,3 @@ module "function_app" {
   tags                              = var.tags
   unique_id                         = var.unique_id
 }
-
-output "function_app_backend_url" {
-  value = module.function_app.backend_url
-}
