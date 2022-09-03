@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.8.0"
+      version = "3.21.1"
     }
   }
 }
@@ -55,5 +55,6 @@ module "function_app" {
   storage_account                   = module.storage_account.name
   storage_account_connection_string = module.storage_account.connection_string
   tags                              = var.tags
+  tenant_id                         = var.ARM_TENANT_ID
   unique_id                         = var.unique_id
 }

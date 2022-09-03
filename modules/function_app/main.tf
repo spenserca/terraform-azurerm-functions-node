@@ -8,6 +8,7 @@ variable "service_plan_id" {}
 variable "storage_account" {}
 variable "storage_account_connection_string" {}
 variable "tags" {}
+variable "tenant_id" {}
 variable "unique_id" {}
 
 locals {
@@ -40,11 +41,15 @@ resource "azurerm_windows_function_app" "function_app" {
   auth_settings {
     enabled = true
     active_directory {
+      allowed_audiences = [
+        "api://${var.backend_client_id}"
+      ]
       client_id     = var.backend_client_id
       client_secret = var.backend_client_secret
     }
     default_provider              = "AzureActiveDirectory"
     unauthenticated_client_action = "RedirectToLoginPage"
+    issuer                        = "https://sts.windows.net/${var.tenant_id}/v2.0"
   }
 
   functions_extension_version = "~4"
