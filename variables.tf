@@ -13,6 +13,30 @@ variable "app_settings" {
   description = "App setting/environment variables for the function app."
 }
 
+variable "ARM_CLIENT_ID" {
+  type        = string
+  sensitive   = true
+  description = "Sourced from TF_VAR_ARM_CLIENT_ID env var."
+}
+
+variable "ARM_CLIENT_SECRET" {
+  type        = string
+  sensitive   = true
+  description = "Sourced from TF_VAR_ARM_CLIENT_SECRET env var."
+}
+
+variable "ARM_SUBSCRIPTION_ID" {
+  type        = string
+  sensitive   = true
+  description = "Sourced from TF_VAR_ARM_SUBSCRIPTION_ID env var."
+}
+
+variable "ARM_TENANT_ID" {
+  type        = string
+  sensitive   = true
+  description = "Sourced from TF_VAR_ARM_TENANT_ID env var."
+}
+
 variable "backend_client_secret" {
   description = "The secret of the backend app registration representing the function app."
 }
