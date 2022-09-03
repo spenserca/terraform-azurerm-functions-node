@@ -40,6 +40,7 @@ resource "azurerm_windows_function_app" "function_app" {
 
   auth_settings {
     enabled = true
+    runtime_version = "~2"
     active_directory {
       allowed_audiences = [
         "api://${var.backend_client_id}"
