@@ -69,5 +69,5 @@ output "backend_url" {
 }
 
 output "managed_identity_principal_id" {
-  value = azurerm_windows_function_app.function_app.identity.principal_id[0]
+  value = azurerm_windows_function_app.function_app.identity[0].principal_id
 }
