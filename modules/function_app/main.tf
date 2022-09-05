@@ -39,7 +39,7 @@ resource "azurerm_windows_function_app" "function_app" {
   app_settings = merge(local.default_app_settings, var.app_settings)
 
   auth_settings {
-    enabled = true
+    enabled         = true
     runtime_version = "~2"
     active_directory {
       allowed_audiences = [
@@ -66,4 +66,8 @@ resource "azurerm_windows_function_app" "function_app" {
 
 output "backend_url" {
   value = "https://${azurerm_windows_function_app.function_app.default_hostname}"
+}
+
+output "managed_identity_principal_id" {
+  value = azurerm_windows_function_app.function_app.identity.principal_id
 }
