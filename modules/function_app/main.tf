@@ -28,7 +28,7 @@ resource "azurerm_windows_function_app" "function_app" {
     application_insights_key = var.app_insights_key
 
     application_stack {
-      node_version = "~14"
+      node_version = "~16"
     }
 
     cors {
